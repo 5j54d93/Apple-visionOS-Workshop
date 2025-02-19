@@ -7,6 +7,10 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/5j54d93/Apple-visionOS-Workshop)
 ![Platform](https://img.shields.io/badge/platform-visionOS-lightgrey)
 
+<img src="https://github.com/5j54d93/Apple-visionOS-Workshop/blob/main/.github/Assets/VisionProEvent.png" width='100%' height='100%'/>
+
+## Overview
+
 ## License：MIT
 
 This package is [MIT licensed](https://github.com/5j54d93/Apple-visionOS-Workshop/blob/main/LICENSE).
