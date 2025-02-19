@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "sneaker_airforce.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -10,21 +10,21 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
-
+    
+    @Environment(CartModel.self) private var cartModel
+    @Environment(AppModel.self) private var appModel
+    
+    @State private var tabSelection = TabType.allCases.first
+    
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
-
-            ToggleImmersiveSpaceButton()
+        TabView(selection: $tabSelection) {
+            ForEach(TabType.allCases, id: \.self) { tabType in
+                Tab(tabType.displayName, systemImage: tabType.systemImage, value: tabType) {
+                    tabType.content
+                        .environment(appModel)
+                        .environment(cartModel)
+                }
+            }
         }
-        .padding()
     }
-}
-
-#Preview(windowStyle: .automatic) {
-    ContentView()
-        .environment(AppModel())
 }

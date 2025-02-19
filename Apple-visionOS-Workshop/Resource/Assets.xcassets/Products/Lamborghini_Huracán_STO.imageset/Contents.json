@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Lamborghini_Huracán_STO.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

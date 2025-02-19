@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "sneaker_pegasustrail.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

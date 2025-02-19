@@ -8,18 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		273E97B02D5B487E008E0B2B /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 273E97AF2D5B487E008E0B2B /* RealityKitContent */; };
+		276BAD2A2D5DF0530093D3F0 /* basement_parking_hdri.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 276BAD292D5DF0530093D3F0 /* basement_parking_hdri.skybox */; };
+		276BAD2D2D5EE3310093D3F0 /* clear_night_hdri.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 276BAD2C2D5EE3300093D3F0 /* clear_night_hdri.skybox */; };
+		276BAD332D5EE3850093D3F0 /* colorful_house_hdri.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 276BAD322D5EE3850093D3F0 /* colorful_house_hdri.skybox */; };
+		276BAD362D5EE39C0093D3F0 /* sky_hdri.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 276BAD352D5EE39C0093D3F0 /* sky_hdri.skybox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		273E97AA2D5B487E008E0B2B /* Apple-visionOS-Workshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apple-visionOS-Workshop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		273E97AE2D5B487E008E0B2B /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
+		276BAD292D5DF0530093D3F0 /* basement_parking_hdri.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = basement_parking_hdri.skybox; sourceTree = "<group>"; };
+		276BAD2C2D5EE3300093D3F0 /* clear_night_hdri.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = clear_night_hdri.skybox; sourceTree = "<group>"; };
+		276BAD322D5EE3850093D3F0 /* colorful_house_hdri.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = colorful_house_hdri.skybox; sourceTree = "<group>"; };
+		276BAD352D5EE39C0093D3F0 /* sky_hdri.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = sky_hdri.skybox; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		273E97C12D5B487F008E0B2B /* Exceptions for "Apple-visionOS-Workshop" folder in "Apple-visionOS-Workshop" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resource/Info.plist,
 			);
 			target = 273E97A92D5B487E008E0B2B /* Apple-visionOS-Workshop */;
 		};
@@ -53,6 +61,10 @@
 			children = (
 				273E97AC2D5B487E008E0B2B /* Apple-visionOS-Workshop */,
 				273E97AD2D5B487E008E0B2B /* Packages */,
+				276BAD292D5DF0530093D3F0 /* basement_parking_hdri.skybox */,
+				276BAD2C2D5EE3300093D3F0 /* clear_night_hdri.skybox */,
+				276BAD322D5EE3850093D3F0 /* colorful_house_hdri.skybox */,
+				276BAD352D5EE39C0093D3F0 /* sky_hdri.skybox */,
 				273E97AB2D5B487E008E0B2B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,6 +150,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276BAD2A2D5DF0530093D3F0 /* basement_parking_hdri.skybox in Resources */,
+				276BAD2D2D5EE3310093D3F0 /* clear_night_hdri.skybox in Resources */,
+				276BAD362D5EE39C0093D3F0 /* sky_hdri.skybox in Resources */,
+				276BAD332D5EE3850093D3F0 /* colorful_house_hdri.skybox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +181,8 @@
 				DEVELOPMENT_TEAM = ZBK262H8J2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(TARGET_NAME)/Resource/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Apple visionOS Workshop";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -191,7 +208,8 @@
 				DEVELOPMENT_TEAM = ZBK262H8J2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(TARGET_NAME)/Resource/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Apple visionOS Workshop";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

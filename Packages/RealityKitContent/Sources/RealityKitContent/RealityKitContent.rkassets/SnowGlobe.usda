@@ -1,0 +1,972 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+reorder rootPrims = ["Root", "GridMaterial"]
+
+def Xform "Root"
+{
+    reorder nameChildren = ["Base", "Button", "Sphere", "Material", "Terrain", "Track", "Train", "Mountain", "Mountain02", "StreetTree", "StreetTree_1", "Castle", "Tree", "LittleHouse", "StreetTree_2", "lamp_post", "Snow_ParticleEmitter", "Model_Sorting_Group", "TrainMoveTimeline", "TrainTimeline", "SteamTrainHorn01", "SteamTrainPassing02", "BGM_AmbientAudio", "SpotLight", "Holiday_Music_wav", "RCP_BehaviorsContainer", "OnAddedToScene", "ButtonTimeLine", "AmbientAudioTimeline", "Ambience_Snow_Sounds_wav"]
+    rel material:binding = None (
+        bindMaterialAs = "weakerThanDescendants"
+    )
+    float3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def "Base" (
+        active = true
+        references = @Base.usdc@
+    )
+    {
+        quatf xformOp:orient = (0.5, -0.5, -0.5, -0.5)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Button" (
+        active = true
+        references = @Button.usdc@
+    )
+    {
+        quatf xformOp:orient = (0.5, -0.5, -0.5, -0.5)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/Button/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/Button/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Button/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Button>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/ButtonTimeLine>
+                rel animationLibraryKeyOverrideKey = </Root/Button/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def "Terrain" (
+        active = true
+        references = @Terrain.usdc@
+    )
+    {
+        quatf xformOp:orient = (0.5, -0.5, -0.5, -0.5)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Track" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (4.7123885, -1.5707963, 0)
+        }
+        references = @Track.usdc@
+    )
+    {
+        reorder nameChildren = ["Track", "_materials", "Train"]
+        quatf xformOp:orient = (0.5, 0.50000006, -0.49999997, 0.5)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.082, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def Sphere "Sphere" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </Root/Material/Material_Glass> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        double radius = 0.1
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.11840647, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def Material "DefaultMaterial"
+        {
+            prepend token outputs:surface.connect = </Root/Sphere/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+
+            def Shader "DefaultSurfaceShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def RealityKitComponent "MeshSorting"
+        {
+            rel group = </Root/Model_Sorting_Group>
+            token info:id = "RealityKit.MeshSorting"
+            int priorityInGroup = 2
+        }
+    }
+
+    def "Material" (
+        active = true
+        references = @Material.usda@
+    )
+    {
+        float3 xformOp:scale = (1, 1, 1)
+    }
+
+    def "Train" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707965, -1.0471978, 1.78814e-7)
+        }
+        references = @Train.usdc@
+    )
+    {
+        reorder nameChildren = ["Locomotive_Wheel", "_materials", "Coach_Body", "Coach_Roof", "Coach_Wheel", "Coach_Window", "Chain", "Window_and_Decoration", "Light", "Locomotive_Body", "Locomotive_Engine", "TrainPassing_SpatialAudio", "SpotLight"]
+        quatf xformOp:orient = (0.6123724, -0.6123724, -0.35355347, -0.3535534)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0, 0.082, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Locomotive_Engine"
+        {
+            reorder nameChildren = ["Cylinder_002", "TrainHorn_SpatialAudio", "Steam_ParticleEmitter", "TrainPassing_SpatialAudio"]
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (0.45055082, 0.5, 0.5)
+            double3 xformOp:translate = (0.0695330947637558, -0.003118717111647129, 0.008540092036128044)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def Xform "TrainHorn_SpatialAudio" (
+                customData = {
+                    float3 rotationEulerHint = (1.5707967, 1.19209275e-7, 3.1415927)
+                }
+            )
+            {
+                quatf xformOp:orient = (1.1238235e-8, -7.305546e-8, 0.7071069, 0.70710665)
+                float3 xformOp:scale = (2.0570736, 2.0000005, 2.1667151)
+                float3 xformOp:translate = (0, -0.016, -0.0042)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "SpatialAudio"
+                {
+                    uniform token info:id = "RealityKit.SpatialAudio"
+                }
+
+                def RealityKitComponent "AudioLibrary"
+                {
+                    uniform token info:id = "RealityKit.AudioLibrary"
+
+                    def RealityKitDict "resources"
+                    {
+                        string[] keys = ["SteamTrainHorn01.usdz"]
+                        rel values = </Root/SteamTrainHorn01>
+                    }
+                }
+            }
+
+            def Xform "Steam_ParticleEmitter"
+            {
+                quatf xformOp:orient = (0.6203792, 0.62037915, 0.33930776, 0.33930764)
+                float3 xformOp:scale = (2.0570736, 2.0000002, 2.1667151)
+                float3 xformOp:translate = (0.0010363013, -0.0017625694, 0.004919797)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                def RealityKitComponent "VFXEmitter"
+                {
+                    token info:id = "RealityKit.VFXEmitter"
+
+                    def RealityKitStruct "currentState"
+                    {
+                        int64 burstCount = 100
+                        double emissionDuration = 0.8
+                        token emitterShape = "Point"
+                        bool isLocal = 1
+                        float particleSpeed = 0.03
+                        float3 shapeSize = (0.06, 0.06, 0.06)
+
+                        def RealityKitStruct "mainEmitter"
+                        {
+                            float birthRate = 40
+                            float4 endColorA = (0.0013006331, 0.032195132, 1, 1)
+                            float noiseAnimationSpeed = 0
+                            float noiseScale = 1
+                            float noiseStrength = 0
+                            token opacityOverLife = "QuickFadeInOut"
+                            double particleLifeSpan = 0.8
+                            float particleMass = 0.02
+                            float particleSize = 0.006
+                            float sizeMultiplierAtEndOfLifespan = 0.02
+                            float4 startColorA = (0.8304888, 0.83053297, 0.8305093, 1)
+                            bool useEndColor = 0
+                            bool useEndColorRange = 0
+                            bool useStartColorRange = 0
+                        }
+
+                        def RealityKitStruct "spawnedEmitter"
+                        {
+                        }
+                    }
+                }
+
+                def RealityKitComponent "MeshSorting"
+                {
+                    rel group = </Root/Model_Sorting_Group>
+                    token info:id = "RealityKit.MeshSorting"
+                    int priorityInGroup = 1
+                }
+            }
+        }
+
+        def Xform "TrainPassing_SpatialAudio" (
+            customData = {
+                float3 rotationEulerHint = (1.5707967, 1.1920925e-7, 3.1415927)
+            }
+        )
+        {
+            quatf xformOp:orient = (2.1641053e-8, -7.1904076e-8, 0.7071069, 0.70710665)
+            float3 xformOp:scale = (0.9268163, 1.0000001, 1.0833575)
+            float3 xformOp:translate = (0.0695331, -0.011118717, 0.006440088)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "SpatialAudio"
+            {
+                uniform token info:id = "RealityKit.SpatialAudio"
+            }
+
+            def RealityKitComponent "AudioLibrary"
+            {
+                uniform token info:id = "RealityKit.AudioLibrary"
+
+                def RealityKitDict "resources"
+                {
+                    string[] keys = ["SteamTrainPassing02.usdz"]
+                    rel values = </Root/SteamTrainPassing02>
+                }
+            }
+        }
+
+        def Xform "SpotLight" (
+            customData = {
+                float3 rotationEulerHint = (-1.5707955, 3.1415906, 0)
+            }
+        )
+        {
+            quatf xformOp:orient = (6.43441e-7, -6.4344084e-7, 0.7071069, 0.70710665)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.06954, -0.00836, 0.00637)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "SpotLight"
+            {
+                float attenuationRadius = 8
+                float3 color = (0.96751404, 0.44405568, 0.030739415)
+                token info:id = "RealityKit.SpotLight"
+                float innerAngle = 40
+                float intensity = 200
+                float outerAngle = 50
+
+                def RealityKitStruct "Shadow"
+                {
+                }
+            }
+        }
+
+        over "_materials"
+        {
+            reorder nameChildren = ["Black_Wheel", "Black_Track", "Blue_Train", "Yellow", "Black_Engine", "LightYellow"]
+            over "Yellow"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+
+            def Material "LightYellow" (
+                references = </Root/Train/_materials/Yellow>
+            )
+            {
+                token outputs:surface.connect = </Root/Train/_materials/LightYellow/Principled_BSDF.outputs:surface>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+                custom string userProperties:blender:data_name = "Yellow"
+
+                def Shader "Principled_BSDF"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float inputs:clearcoat = 0
+                    float inputs:clearcoatRoughness = 0.03
+                    color3f inputs:diffuseColor = (1, 0.79791784, 0.06298347)
+                    color3f inputs:emissiveColor = (0.99942404, 0.9855537, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:ior = 1.5
+                    float inputs:metallic = 0
+                    float inputs:opacity = 1
+                    float inputs:roughness = 0.5
+                    float inputs:specular = 0.5
+                    token outputs:surface
+                }
+            }
+        }
+
+        over "Light"
+        {
+            over "Cylinder_007" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Train/_materials/LightYellow> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+    }
+
+    def "Mountain" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.4660765, 1.5707963, 0)
+        }
+        references = @Mountain.usdc@
+    )
+    {
+        quatf xformOp:orient = (0.5254828, -0.4731468, 0.5254827, 0.47314677)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.02, 0.095, -0.015)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Mountain02" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5707964, -2.4958208, 0.12071967)
+        }
+        references = @Mountain02.usdc@
+    )
+    {
+        quatf xformOp:orient = (-0.2644104, 0.18350904, 0.6828795, 0.65581036)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0.03, 0.086, -0.013058721)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "StreetTree" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.5358899, -0.7853981, 0.034906697)
+        }
+        references = @StreetTree.usdc@
+    )
+    {
+        quatf xformOp:orient = (0.66912156, -0.63687867, -0.28643814, -0.25419515)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (0.015, 0.098, 0.021956377)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "StreetTree_1" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.6929694, -0.78539807, 0.034906656)
+        }
+        references = @StreetTree.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (20, 20)
+        int ui:nodegraph:node:stackingOrder = 1
+        quatf xformOp:orient = (0.61709, -0.68741405, -0.2656112, -0.27588522)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.022, 0.095, 0.031008203)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Castle" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (4.712388, -1.6755161, 0.00000166893)
+        }
+        references = @Castle.usdc@
+    )
+    {
+        quatf xformOp:orient = (-0.47314695, 0.47314662, 0.52548283, 0.52548265)
+        float3 xformOp:scale = (0.5, 0.5, 0.5)
+        float3 xformOp:translate = (1.4551915e-10, 0.1025, 2.561137e-9)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Tree" (
+        active = true
+        references = @Tree.usdc@
+    )
+    {
+        quatf xformOp:orient = (0.5, -0.5, -0.5, -0.5)
+        float3 xformOp:scale = (0.6, 0.6, 0.6)
+        float3 xformOp:translate = (-0.02, 0.089, 0.048)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "LittleHouse" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.6231556, -1.7453274, 0.08726382)
+        }
+        references = @LittleHouse.usdc@
+    )
+    {
+        quatf xformOp:orient = (-0.4662825, 0.44281775, 0.5471457, 0.53584003)
+        float3 xformOp:scale = (0.2, 0.2, 0.2)
+        float3 xformOp:translate = (0.02, 0.0886, 0.046)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "StreetTree_2" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (-1.6231561, -0.7923795, -0.062831886)
+        }
+        references = @StreetTree.usdc@
+    )
+    {
+        float2 ui:nodegraph:node:pos = (40, 40)
+        int ui:nodegraph:node:stackingOrder = 2
+        quatf xformOp:orient = (0.62592727, -0.6771992, -0.24448949, -0.2997351)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.046, 0.084, -0.036)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "lamp_post" (
+        active = true
+        references = @lamp_post.usdz@
+    )
+    {
+        reorder nameChildren = ["Materials", "Geom", "PointLight"]
+        float3 xformOp:scale = (0.004, 0.004, 0.004)
+        float3 xformOp:translate = (0.012853901, 0.085997716, 0.04831079)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "Materials"
+        {
+            over "Material"
+            {
+                token outputs:mtlx:surface
+                token outputs:realitykit:vertex
+            }
+
+            over "glass"
+            {
+                token outputs:mtlx:surface.connect = </Root/lamp_post/Materials/glass/PreviewSurface.outputs:out>
+                token outputs:realitykit:vertex
+                token outputs:surface.connect = </Root/lamp_post/Materials/glass/surfaceShader.outputs:surface>
+                float2 ui:nodegraph:realitykit:subgraphOutputs:pos = (0, 110.5)
+                int ui:nodegraph:realitykit:subgraphOutputs:stackingOrder = 25
+
+                over "surfaceShader" (
+                    active = false
+                )
+                {
+                    color3f inputs:diffuseColor = (0.94253063, 0.7695122, 0.58454096) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                    color3f inputs:emissiveColor = (0.71103114, 0.71550304, 0.71550304) (
+                        colorSpace = "srgb_displayp3"
+                    )
+                }
+
+                def Shader "PreviewSurface"
+                {
+                    uniform token info:id = "ND_UsdPreviewSurface_surfaceshader"
+                    color3f inputs:diffuseColor = (1, 0.57810515, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    color3f inputs:emissiveColor = (1, 0.57810515, 0) (
+                        colorSpace = "srgb_texture"
+                    )
+                    float inputs:metallic = 0.8
+                    float inputs:opacity = 0.8
+                    float inputs:opacityThreshold
+                    float inputs:roughness
+                    token outputs:out
+                    float2 ui:nodegraph:node:pos = (-255, 105)
+                    int ui:nodegraph:node:stackingOrder = 31
+                    string[] ui:nodegraph:realitykit:node:attributesShowingChildren = ["inputs:diffuseColor", "Advanced"]
+                }
+            }
+        }
+
+        over "Geom"
+        {
+            over "top" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/lamp_post/Materials/Material> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+
+            over "glass" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/lamp_post/Materials/glass> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+            }
+        }
+
+        def Xform "PointLight"
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (100, 100, 100)
+            float3 xformOp:translate = (0, 3.193, 0.06550026)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "PointLight"
+            {
+                float attenuationFalloffExponent = 2.6
+                float attenuationRadius = 1
+                float3 color = (0.990274, 0.3367156, 0)
+                token info:id = "RealityKit.PointLight"
+                float intensity = 12
+            }
+        }
+    }
+
+    def Xform "Snow_ParticleEmitter"
+    {
+        reorder nameChildren = ["VFXEmitter", "MeshSorting", "SnowAmbientAudio"]
+        float3 xformOp:translate = (0, 0.162, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "VFXEmitter"
+        {
+            token info:id = "RealityKit.VFXEmitter"
+
+            def RealityKitStruct "currentState"
+            {
+                token birthDirection = "Constant"
+                token birthLocation = "Surface"
+                int64 burstCount = 800
+                float3 emissionDirection = (0, -1, 0)
+                double emissionDuration = 1
+                double emissionDurationVariation = 0
+                token emitterShape = "Sphere"
+                double idleDuration = 0
+                double idleDurationVariation = 0
+                bool isLocal = 1
+                bool isSpawningEnabled = 0
+                bool loops = 1
+                float particleSpeed = 0.04
+                float particleSpeedVariation = 0.04
+                float3 shapeSize = (0.08, 0.05, 0.08)
+                bool spawnInheritParentColor = 0
+                token spawnOccasion = "OnUpdate"
+                float spawnSpreadFactor = 0
+                float spawnSpreadFactorVariation = 0
+                float spawnVelocityFactor = 1
+                double warmupDuration = 0
+
+                def RealityKitStruct "mainEmitter"
+                {
+                    float3 acceleration = (0, 0, 0)
+                    token billboardMode = "Billboard"
+                    float birthRate = 800
+                    float birthRateVariation = 10
+                    token blendMode = "Alpha"
+                    float colorEvolutionPower = 0
+                    float dampingFactor = 0
+                    float4 endColorA = (1, 1, 1, 1)
+                    float4 endColorB = (1, 1, 1, 1)
+                    bool isLightingEnabled = 0
+                    float noiseAnimationSpeed = 2
+                    float noiseScale = 1
+                    float noiseStrength = 0.03
+                    token opacityOverLife = "GradualFadeInOut"
+                    float particleAngle = 3.1415925
+                    float particleAngleVariation = 3.1415925
+                    float particleAngularVelocity = 0
+                    float particleAngularVelocityVariation = 0.5
+                    asset particleImage = @ParticleEmitterPresetTextures/snow.png@
+                    double particleLifeSpan = 0.6
+                    double particleLifeSpanVariation = 0.2
+                    float particleMass = 1
+                    float particleMassVariation = 0
+                    float particleSize = 0.0006
+                    float particleSizeVariation = 0.002
+                    float3 radialGravityCenter = (1, 1, 0)
+                    float radialGravityStrength = 0
+                    float sizeMultiplierAtEndOfLifespan = 0.8
+                    float sizeMultiplierAtEndOfLifespanPower = 10
+                    token sortOrder = "IncreasingDepth"
+                    float spreadingAngle = 0
+                    float4 startColorA = (1, 1, 1, 1)
+                    float4 startColorB = (1, 1, 1, 1)
+                    float stretchFactor = 0
+                    bool useEndColor = 0
+                    bool useEndColorRange = 0
+                    bool useStartColorRange = 0
+                    float3 vortexDirection = (0, 1, 0)
+                    float vortexStrength = 0
+                }
+
+                def RealityKitStruct "spawnedEmitter"
+                {
+                }
+            }
+        }
+
+        def RealityKitComponent "MeshSorting"
+        {
+            rel group = </Root/Model_Sorting_Group>
+            token info:id = "RealityKit.MeshSorting"
+            int priorityInGroup = 0
+        }
+
+        def Xform "SnowAmbientAudio"
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, -0.162, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def RealityKitComponent "AmbientAudio"
+            {
+                uniform token info:id = "RealityKit.AmbientAudio"
+            }
+
+            def RealityKitComponent "AudioLibrary"
+            {
+                uniform token info:id = "RealityKit.AudioLibrary"
+
+                def RealityKitDict "resources"
+                {
+                    string[] keys = ["Ambience Snow Sounds.wav"]
+                    rel values = </Root/Ambience_Snow_Sounds_wav>
+                }
+            }
+        }
+    }
+
+    def RealityKitMeshSortingGroup "Model_Sorting_Group" (
+        active = true
+    )
+    {
+    }
+
+    def RealityKitTimeline "TrainMoveTimeline"
+    {
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 3
+                uniform token info:id = "3A7A1028-63C4-4295-B778-BCB8E0F92470"
+                float3 localAxis = (0, 0, 1)
+                float revolutions = 1
+                double startTime = 0
+                rel target = </Root/Train>
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeInOut"
+                }
+            }
+        }
+    }
+
+    def RealityKitTimeline "ButtonTimeLine"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3", "Track4", "Track5"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Transform_To"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0.6
+                uniform token info:id = "0E2A9055-2544-486E-9EFA-49F45D16B7AF"
+                float3 position = (0, 0, -0.0085)
+                quatf rotation = (0.5, -0.5, -0.5, -0.5)
+                float3 scale = (1, 1, 1)
+                double startTime = 0
+                rel target = </Root/Button>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeOut"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            reorder nameChildren = ["Transform_To", "Notification"]
+            def RealityKitAction "Transform_To"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0.6
+                uniform token info:id = "0E2A9055-2544-486E-9EFA-49F45D16B7AF"
+                float3 position = (0, 0, 0)
+                quatf rotation = (0.5, -0.5, -0.5, -0.5)
+                float3 scale = (1, 1, 1)
+                double startTime = 0.7
+                rel target = </Root/Button>
+                float2 ui:nodegraph:node:pos = (-51.285812, 127.683945)
+                int ui:nodegraph:node:stackingOrder = 1
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                    token type = "easeIn"
+                }
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            reorder nameChildren = ["Play_Timeline", "Notification"]
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 3.4000000000000004
+                uniform token info:id = "C8D34744-5B10-4AA7-ABE2-E4B282C5EDBE"
+                double startTime = 0.2
+                rel timeline = </Root/TrainTimeline>
+            }
+        }
+
+        def RealityKitTrack "Track4"
+        {
+            reorder nameChildren = ["TrainAnimationStart", "TrainAnimationStop"]
+            def RealityKitAction "TrainAnimationStart"
+            {
+                string actionKind = "notification"
+                double duration = 0
+                uniform token info:id = "C7C003A3-E6AB-435B-B757-9A6348833281"
+                string notificationName = "TrainAnimationStart"
+                double startTime = 0.2
+                rel target = </Root/Button>
+            }
+
+            def RealityKitAction "TrainAnimationStop"
+            {
+                string actionKind = "notification"
+                double duration = 0
+                uniform token info:id = "C7C003A3-E6AB-435B-B757-9A6348833281"
+                string notificationName = "TrainAnimationStop"
+                double startTime = 3.6
+                rel target = </Root/Button>
+                float2 ui:nodegraph:node:pos = (20, 20)
+                int ui:nodegraph:node:stackingOrder = 1
+            }
+        }
+    }
+
+    def RealityKitTimeline "TrainTimeline"
+    {
+        reorder nameChildren = ["Track", "Track2", "Track3"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Timeline"
+            {
+                string actionKind = "timeline"
+                int blendLayer = 500
+                double duration = 3
+                uniform token info:id = "1ADCA4D3-C7CC-41B3-8867-9033F28B3A79"
+                double startTime = 0
+                rel timeline = </Root/TrainMoveTimeline>
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "SteamTrainHorn01.usdz"
+                bool controlPlayback = 1
+                double duration = 3
+                uniform token info:id = "D9872C98-8C9D-4EF2-8802-40629DA7B7FC"
+                double startTime = 0
+                rel target = </Root/Train/Locomotive_Engine/TrainHorn_SpatialAudio>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "SteamTrainPassing02.usdz"
+                bool controlPlayback = 1
+                double duration = 1.8
+                uniform token info:id = "355215C1-036A-4E88-B4F5-0091C95309FD"
+                double startTime = 1.6
+                rel target = </Root/Train/TrainPassing_SpatialAudio>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+    }
+
+    def "SteamTrainHorn01" (
+        active = true
+        references = @Sound Effects/SteamTrainHorn01.usdz@
+    )
+    {
+    }
+
+    def "SteamTrainPassing02" (
+        active = true
+        references = @Sound Effects/SteamTrainPassing02.usdz@
+    )
+    {
+    }
+
+    def Xform "BGM_AmbientAudio"
+    {
+        def RealityKitComponent "AmbientAudio"
+        {
+            uniform token info:id = "RealityKit.AmbientAudio"
+        }
+
+        def RealityKitComponent "AudioLibrary"
+        {
+            uniform token info:id = "RealityKit.AudioLibrary"
+
+            def RealityKitDict "resources"
+            {
+                string[] keys = ["Holiday Music.wav"]
+                rel values = </Root/Holiday_Music_wav>
+            }
+        }
+    }
+
+    def RealityKitAudioFile "Holiday_Music_wav"
+    {
+        uniform asset file = @Sound Effects/Holiday Music.wav@
+        uniform bool shouldLoop = 1
+    }
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        rel behaviors = </Root/OnAddedToScene>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnAddedToScene"
+    {
+        rel actions = </Root/OnAddedToScene/Action>
+        uniform bool exclusive
+        rel triggers = </Root/OnAddedToScene/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </Root>
+            token info:id = "SceneTransition"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = </Root>
+            rel animationLibraryKey = </Root/AmbientAudioTimeline>
+            rel animationLibraryKeyOverrideKey = </Root/OnAddedToScene/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
+        }
+    }
+
+    def RealityKitTimeline "AmbientAudioTimeline"
+    {
+        reorder nameChildren = ["Track", "Track2"]
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Holiday Music.wav"
+                bool controlPlayback = 1
+                double duration = 240.024
+                uniform token info:id = "C3BCE514-65D2-4762-AB25-DFA6FB263948"
+                double loopCount = 0
+                double startTime = 0
+                rel target = </Root/BGM_AmbientAudio>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track2"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "Ambience Snow Sounds.wav"
+                bool controlPlayback = 1
+                double duration = 141.528
+                uniform token info:id = "65BCE059-67E1-4C61-8B24-7FA615C28C51"
+                double loopCount = 0
+                double startTime = 0
+                rel target = </Root/Snow_ParticleEmitter/SnowAmbientAudio>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+    }
+
+    def RealityKitAudioFile "Ambience_Snow_Sounds_wav"
+    {
+        uniform asset file = @Sound Effects/Ambience Snow Sounds.wav@
+        uniform bool shouldLoop = 1
+    }
+}
+
