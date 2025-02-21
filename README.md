@@ -7,9 +7,25 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/5j54d93/Apple-visionOS-Workshop)
 ![Platform](https://img.shields.io/badge/platform-visionOS-lightgrey)
 
+This repository showcases all the features I learned from Apple's visionOS workshop, including SwiftUI, Model3D, RealityView, ImmersiveSpace, Anchors, Sky Spheres, USDZ, Ambient Audio, Spatial Audio, Notifications, and more.
+
 <img src="https://github.com/5j54d93/Apple-visionOS-Workshop/blob/main/.github/Assets/VisionProEvent.png" width='100%' height='100%'/>
 
 ## Overview
+
+1. [**SwiftUI**](https://github.com/5j54d93/Apple-visionOS-Workshop#SwiftUI)
+2. [**Sky Sphere**](https://github.com/5j54d93/Apple-visionOS-Workshop#Sky-Sphere)
+3. [**Anchor**](https://github.com/5j54d93/Apple-visionOS-Workshop#Anchor)
+4. [**Snow Globe**](https://github.com/5j54d93/Apple-visionOS-Workshop#Snow-Globe)
+5. [**License**](https://github.com/5j54d93/Apple-visionOS-Workshop#licensemit)
+
+## SwiftUI
+
+## Sky Sphere
+
+## Anchor
+
+## Snow Globe
 
 ## License：MIT
 
